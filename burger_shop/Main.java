@@ -4,20 +4,29 @@ public class Main {
     public static void main(String[] args) {
         //main execution of the burger shop goes here.  This is the "entry point" of your application
 
-        Burger hamburger = new Burger("Basic", "Sausage",3.56, "White");
-        double price = hamburger.itemizeHamburger();
-        hamburger.addTopping1("Tomato",0.27);
-        hamburger.addTopping2("Lettuce",0.75);
-        hamburger.addTopping3("Cheese",1.12);
-        System.out.println("Total burger price is "+ hamburger.itemizeHamburger());
+        Burger hamburger = new Burger("sausage","white");
+        hamburger.addTopping("tomato");
+        hamburger.addTopping("lettuce");
+//
+        Meal firstMeal = new Meal(hamburger,"coke","apple pie");
+        firstMeal.addSide("fries");
+       // firstMeal.addSide("ice cream");
+       //firstMeal.itemizeMeal();
 
-        HealthBurger healthyBurger = new HealthBurger("Bacon",6.56);
-        healthyBurger.addTopping1("Egg",2.27);
-        healthyBurger.addTopping2("Spinach",1.75);
-        System.out.println("Total healthy burger price is "+ healthyBurger.itemizeHamburger());
+        Order secondOrder  = new Order(firstMeal);
+        secondOrder.addDrink("lemonade");
+        secondOrder.addSide("ice cream");
+       // secondOrder.itemizeOrder();
+        secondOrder.itemizeOrder();
 
-
-        DeluxeBurger db = new DeluxeBurger();
-        db.itemizeHamburger();
+//        Order firstOrder = new Order("deluxeburger","white","bacon");
+//        firstOrder.addToppings("lettuce");
+//        firstOrder.addToppings("ketchup");
+//        firstOrder.addToppings("tomato");
+//        firstOrder.addToppings("relish");
+//
+//        firstOrder.itemizeOrder();
+//        System.out.println(        firstOrder.purchaseOrder()
+//);
     }
 }

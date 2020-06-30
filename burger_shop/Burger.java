@@ -1,41 +1,48 @@
-
+import java.util.HashMap;
 
 public class Burger {
-    private String name;
-    private String meat;
+    private Meat meat;
     private double price;
     private double originalPrice;
-    private String breadRollType;
+    private Bread bread;
+    protected HashMap<String,Double> selectedToppings = new HashMap<String,Double>();
+    final protected HashMap<String,Double> toppings = new HashMap<String,Double>(){
+        {
+            put("lettuce",0.67);
+            put("tomato",0.49);
+            put("mustard",0.15);
+            put("ketchup",0.22);
+            put("relish",1.19);
+            put("cheese",0.89);
+            put("mayo",0.19);
 
-    private String toppingName1;
-    private double toppingPrice1;
+        }
+    };
 
-    private String toppingName2;
-    private double toppingPrice2;
-
-    private String toppingName3;
-    private double toppingPrice3;
-
-    private String toppingName4;
-    private double toppingPrice4;
-
-
-    public Burger(String name, String meat, double price, String breadRollType) {
-        this.name = name;
-        this.meat = meat;
-        this.price = price;
-        this.breadRollType = breadRollType;
+    public Burger(String meat, String bread) {
+        this.meat = new Meat(meat);
+        this.price = 4.79;
+        this.bread = new Bread(bread);
         this.originalPrice = price;
     }
 
 
-    public void addTopping1(String name,double price){
-        this.toppingName1 = name;
-        this.toppingPrice1 = price;
+    public void addTopping(String name){
+        if(selectedToppings.size()<2){
+            this.selectedToppings.put(name.toLowerCase(),toppings.get(name));
+            addPrice(this.selectedToppings.get(name));
+        } else{
+            throw new Error("Only two toppings are allowed on the basic burger!");
+        }
     }
-     public void addTopping2(String name,double price){
-        this.toppingName2 = name;
-        this.toppingPrice2 = price;
+
+    public Burger getBurger(){
+        return this;
+    }
+
+    public double addPrice(double additionPrice){
+        this.price+=additionPrice;
+        return this.price;
     }
 
     public void totalBurgerPrice(){
@@ -46,20 +53,26 @@ public class Burger {
         System.out.println("Price of plain burger is "+this.originalPrice);
     }
 
+    public double getPrice(){
+        return this.price;
+    }
+    public double setPrice(double newPrice){
+        this.price = newPrice;
+        return this.price;
+    }
+
 
     public double itemizeHamburger(){
         double burgerPrice =this.price;
-        System.out.println(this.name + " burger on a "+this.breadRollType+ " roll with "+this.meat+".");
+        System.out.println("The "+this.getClass().getSimpleName()+" on a "+this.bread.getBread()+ " roll with "+this.meat.getMeat()+".");
         System.out.println("The price is "+this.price);
-        if(this.toppingName1 != null) {
-            burgerPrice += this.toppingPrice1;
-        System.out.println("Added "+this.toppingName1+" for an extra "+this.toppingPrice1);
+        if(this.selectedToppings != null) {
+            for (String i : selectedToppings.keySet()) {
+                System.out.println("Added " + i + " for an extra " + this.selectedToppings.get(i));
+            }
         }
-        if(this.toppingName2 != null) {
-            burgerPrice += this.toppingPrice2;
-        System.out.println("Added "+this.toppingName2+" for an extra "+this.toppingPrice2);
-        }
+        totalBurgerPrice();
 
-        return burgerPrice;
+        return this.price;
     }
 }

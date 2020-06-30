@@ -1,39 +1,30 @@
-
+import java.util.HashMap;
 
 public class HealthBurger extends Burger {
-    private String healthyExtraName1;
-    private double healthyExtraPrice1;
-    private String healthyExtraName2;
-    private double healthyExtraPrice2;
 
-
-    public HealthBurger(String meat, double price) {
-        super("Healthy", meat, price, "Brown Rye");
-  
-    }
-
-    public void addHealthyTopping1(String name, double price) {
-        this.healthyExtraName1 = name;
-        this.healthyExtraPrice1 = price;
-
-    }
-
-    public void addHealthyTopping2(String name, double price) {
-        this.healthyExtraName2 = name;
-        this.healthyExtraPrice2 = price;
-
-    }
-
-    public double itemizeHamburger(){
-        double burgerPrice =super.itemizeHamburger();
-        if(this.healthyExtraName1 != null){
-            burgerPrice += this.healthyExtraPrice1;
-            System.out.println("Added "+this.healthyExtraName1+" for an extra "+this.healthyExtraPrice1);
+    final protected HashMap<String,Double> healthyToppings = new HashMap<String,Double>(){
+        {
+            put("lettuce",0.67);
+            put("tomatoes",0.49);
+            put("mustard",0.15);
+            put("ketchup",0.22);
         }
-        if(this.healthyExtraName2 != null){
-            burgerPrice += this.healthyExtraPrice2;
-            System.out.println("Added "+this.healthyExtraName2+" for an extra "+this.healthyExtraPrice2);
+    };
+    public HealthBurger(String meat) {
+        super(meat, "Rye");
+        if(meat.toLowerCase().equals("bacon")||meat.toLowerCase().equals("sausage")){
+            throw new Error("Only healthy meats on the healthy burger.");
         }
-        return burgerPrice;
     }
+
+
+    @Override
+    public void addTopping(String name) {
+        if (selectedToppings.size() < 4) {
+            this.selectedToppings.put(name.toLowerCase(), healthyToppings.get(name));
+        } else {
+            throw new Error("Only four toppings are allowed on the health burger.(And they must be healthy!)");
+        }
+    }
+
 }

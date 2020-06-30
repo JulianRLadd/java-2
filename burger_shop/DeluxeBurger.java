@@ -1,29 +1,18 @@
 
 
 public class DeluxeBurger extends Burger{
-    public DeluxeBurger(){
-        super("Deluxe","Sausage & Bacon",8.96,"White");
-        super.addTopping1("Chips",2.75);
-        super.addTopping2("Drink",1.81);
+    public DeluxeBurger(String meat, String bread){
+        super(meat,bread);
     }
 
     @Override
-    public void addTopping1(String name, double price) {
-        System.out.println("Cannot add additional items to a deluxe burger");
+    public void addTopping(String name){
+        if(selectedToppings.size()<6){
+            this.selectedToppings.put(name.toLowerCase(),toppings.get(name));
+        } else{
+            throw new Error("Only six toppings are allowed on the deluxe burger!");
+        }
     }
 
-    @Override
-    public void addTopping2(String name, double price) {
-        System.out.println("Cannot add additional items to a deluxe burger");
-    }
 
-    @Override
-    public void addTopping3(String name, double price) {
-        System.out.println("Cannot add additional items to a deluxe burger");
-    }
-
-    @Override
-    public void addTopping4(String name, double price) {
-        System.out.println("Cannot add additional items to a deluxe burger");
-    }
 }
