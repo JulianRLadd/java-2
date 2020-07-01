@@ -11,7 +11,7 @@ public class Burger {
             put("lettuce",0.67);
             put("tomato",0.49);
             put("mustard",0.15);
-            put("ketchup",0.22);
+            put("ketchup",0.25);
             put("relish",1.19);
             put("cheese",0.89);
             put("mayo",0.19);

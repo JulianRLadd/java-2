@@ -11,7 +11,6 @@ public class Order {
     private ArrayList<Burger> burgerOrders = new ArrayList<Burger>();
     private ArrayList<Drink> drinkOrders = new ArrayList<Drink>();
     private ArrayList<Side> sideOrders = new ArrayList<Side>();
-    private ArrayList<Meal> mealOrders = new ArrayList<Meal>();
 
 
     public Order(Meal meal){
@@ -71,27 +70,36 @@ public class Order {
         return orderPrice;
     }
 
+    private void resetOrder(){
+        this.meal = null;
+        burgerOrders = new ArrayList<Burger>();
+       drinkOrders = new ArrayList<Drink>();
+        sideOrders = new ArrayList<Side>();
+           }
+
 
     public double purchaseOrder(){
-        double orderSum=0;
+        double orderSum= this.itemizeOrder();
+        System.out.println("You also bought:");
         for(int i =0;i<this.burgerOrders.size();i++){
+            System.out.println(this.burgerOrders.get(i).getClass().getSimpleName());
             System.out.println(this.burgerOrders.get(i).getPrice());
             orderSum+=this.burgerOrders.get(i).getPrice();
         }
          for(int i =0;i<this.sideOrders.size();i++){
+             System.out.println(this.sideOrders.get(i).getName());
              System.out.println(this.sideOrders.get(i).getPrice());
              orderSum+=this.sideOrders.get(i).getPrice();
         }
-         for(int i =0;i<this.mealOrders.size();i++){
-             System.out.println(this.mealOrders.get(i).getPrice());
-
-             orderSum+=this.mealOrders.get(i).getPrice();
-        }
          for(int i =0;i<this.drinkOrders.size();i++){
+             System.out.println(this.drinkOrders.get(i).getName());
              System.out.println(this.drinkOrders.get(i).getPrice());
-
              orderSum+=this.drinkOrders.get(i).getPrice();
         }
+        System.out.println("****************PURCHASE ORDER*************************");
+        System.out.println("Your total is "+orderSum);
+        System.out.println("Thank you for your purchase!!");
+        this.resetOrder();
         return orderSum;
     }
 

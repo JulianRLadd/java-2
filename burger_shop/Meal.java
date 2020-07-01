@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 public class Meal {
     private Burger hamburger;
@@ -53,9 +53,11 @@ public class Meal {
     public double getPrice(){
         double mealPrice = drink.getPrice()+side.getPrice()+ hamburger.getPrice();
 
+        System.out.println(drink.getPrice());
+        System.out.println(side.getPrice()+hamburger.getPrice());
+
         System.out.println("You have a drink of "+this.drink.getName()+" for "+this.drink.getPrice()+".");
         System.out.println("You have a side of "+this.side.getName()+" for "+this.side.getPrice()+".");
-
         if(this.side2 !=null){
             System.out.println("You have a side of "+this.side2.getName()+" for "+this.side2.getPrice()+".");
             mealPrice+=side2.getPrice();

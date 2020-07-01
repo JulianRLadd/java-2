@@ -13,7 +13,7 @@ public class Side {
         {
             put("fries",1.99);
             put("chips",1.49);
-            put("apple pie",0.99);
+            put("apple pie",1.19);
             put("celery sticks",2.39);
             put("carrots",1.99);
             put("mixed fruit",1.59);
